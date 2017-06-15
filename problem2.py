@@ -1,4 +1,4 @@
-#PROBLEM: 
+#PROBLEM:
 #  2
 #
 #NAME: 
