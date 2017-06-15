@@ -1,6 +1,6 @@
-#PROBLEM: 
-#  3
-#
+#PROBLEM:
+#  1
+#  
 #NAME: 
 #  "Largest Prime Factor"
 #
