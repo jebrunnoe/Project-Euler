@@ -1,4 +1,19 @@
-n = "73167176531330624919225119674426574742355349194934"
+#PROBLEM:
+#  8
+#
+#NAME:
+#  "Largest Product in Series"
+#
+#PROMPT:
+#  The four adjacent digits in the 1000-digit number that have the 
+#  greatest product are 9 x 9 x 8 x 9 = 5832. (See number below).
+#  Find the thirteen adjacent digits in the 1000-digit number that 
+#  have the greatest product. What is the value of this product?
+#
+#LINK:
+#  https://projecteuler.net/problem=8
+
+n  = "73167176531330624919225119674426574742355349194934"
 n += "96983520312774506326239578318016984801869478851843"
 n += "85861560789112949495459501737958331952853208805511"
 n += "12540698747158523863050715693290963295227443043557"
@@ -18,11 +33,18 @@ n += "07198403850962455444362981230987879927244284909188"
 n += "84580156166097919133875499200524063689912560717606"
 n += "05886116467109405077541002256983155200055935729725"
 n += "71636269561882670428252483600823257530420752963450"
+
 maximum = 1
+# Iterate through starting positions, noting that the last 13 
+# digit number will start at index 987
 for i in range(0, 988):
-    p = 1
-    for j in range(0, 13):
-	p *= int(n[i + j])
-    if p > maximum: maximum = p
+   product = 1
+   # For each starting position, iterate through the 13 digits
+   # of the number and multiply to obtain that segment's product   
+   for j in range(0, 13): 
+      product *= int(n[i + j])
+   # Check the product against the maximum
+   if product > maximum: 
+      maximum = product
 print maximum
 
