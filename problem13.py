@@ -1,3 +1,16 @@
+#PROBLEM:
+#  13
+#
+#NAME:
+#  "Large Sum"
+#
+#PROMPT:
+#  Work out the first ten digits of the sum of the following 
+#  one-hundred 50-digit numbers. (see number below).
+#
+#LINK:
+#https://projecteuler.net/problem=13
+
 string = """37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629
@@ -98,20 +111,35 @@ string = """37107287533902102798797998220837590246510135740250
 72107838435069186155435662884062257473692284509516
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690"""
+
+# Split the string on new line characters to seperate 
+# the individual 50 digit numbers, set up the dimensions
+# and initialize total_sum and carry
 numbers = string.split("\n")
 rows = len(numbers)
 columns = len(numbers[0])
-total = []
+total_sum = list()
 carry = 0
+
+# Iterate backwards through the columns and down each row, 
+# adding the digits like long-hand addition
 for col in range(columns):
-    dsum = carry
-    for row in range(rows):
-	dsum += int(numbers[row][(columns - 1) - col])
-    carry = (dsum - (dsum % 10)) / 10
-    total.insert(0, dsum % 10)
+   # Initialize the column's sum to the value of carry so it is included in the sum
+   column_sum = carry 
+   for row in range(rows):
+      column_sum += int(numbers[row][(columns - 1) - col])
+   # Separate the column_sum into the tens place digit and the carry
+   # and insert the digit to the front of total_sum list
+   digit = column_sum % 10
+   carry = (column_sum - digit) / 10
+   total_sum.insert(0, digit % 10)
+
+# Break down the remaining carry and add successive tens place digits to the total_sum
 while (carry % 10) > 0:
-    digit = carry % 10
-    total.insert(0, digit)
-    carry = (carry - digit) / 10
-print total[:10]
+   digit = carry % 10
+   total_sum.insert(0, digit)
+   carry = (carry - digit) / 10
+
+# Print the first ten digits of the total_sum
+print total_sum[:10]
 
