@@ -43,7 +43,7 @@ import time
 
 start_time = time.time()
 n = 10
-upper = 100000 # This is the upper bound for the sieve. 100,000 is the maximum needed because sqrt(10,000,000,000) = 10,0000.
+upper = 100000 # This is the upper bound for the sieve. 100,000 is the maximum needed because sqrt(10,000,000,000) = 100,000.
 minimum = 1000000000 # This is the minimum ten digit number.
 S = list() # This is a list of all S(n, d) described in the prompt.
 
