@@ -30,8 +30,7 @@ start_time = time.time()
 digit_count = 100
 rows = 10 # Each table will have 10 rows representing starting digits 0 - 9.
 
-def get_decreasing(cols):
-   decreasing = 0
+def dynamic(cols):
    table = [[0 for col in range(cols)] for row in range(rows)] # Decreasing table.
    # Initialize the first row and column. 
    for row in range(rows):
@@ -45,32 +44,26 @@ def get_decreasing(cols):
 	 for i in range(row + 1):
 	    local_sum = local_sum + table[i][col - 1]
 	 table[row][col] = local_sum
-	 decreasing = decreasing + local_sum
-   # The first column was not included in the running sum. Add it now. 
-   return decreasing + 9
+   return table
 
-def get_increasing(cols):
+def get_decreasing(table, cols):
+   decreasing = 0
+   for row in range(1, rows): # Skip the first row.
+      for col in range(cols):
+	 decreasing = decreasing + table[row][col]
+   return decreasing
+
+def get_increasing(table, cols):
    increasing = 0
-   table = [[0 for col in range(cols)] for row in range(rows)] # Increasing table.
-   # Initialize the first row and column. 
-   for row in range(rows):
-      table[row][0] = 1   
-   for col in range(cols):
-      table[0][col] = 0
-   # Build the table.
-   for col in range(1, cols):
-      for row in range(1, rows):
-	 local_sum = 0
-	 for i in range(row, rows):
-	    local_sum = local_sum + table[i][col - 1]
-	 table[row][col] = local_sum
-	 increasing = increasing + local_sum
-   # The first column was not included in the running sum. Add it now. 
-   return increasing + 9
+   for row in range(rows - 1): # Skip the last row.
+      for col in range(cols):
+	 increasing = increasing + table[row][col]
+   return increasing   
 
 # Numbers where every digit is the same, such as 5555, will be double counted. Subtract off
 # 9 * digit_count from the result to correct it. 
-result = get_increasing(digit_count) + get_decreasing(digit_count) - (9 * digit_count)
+table = dynamic(digit_count)
+result = get_increasing(table, digit_count) + get_decreasing(table, digit_count) - (9 * digit_count)
 
 print result
 print "Runtime: %.5fs" % (time.time() - start_time)
