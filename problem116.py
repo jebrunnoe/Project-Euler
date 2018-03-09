@@ -21,7 +21,6 @@
 import time
 start_time = time.time()
 
-limit = pow(10, 6) # Upper limit from prompt.
 n = 50
 
 def F(m, n): # 'm' represents the block size.
